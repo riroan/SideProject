@@ -10,6 +10,4 @@ class Code(Base):
     language: Mapped[str] = mapped_column(String(100))
     code: Mapped[str] = mapped_column(Text)
 
-    user: Mapped["User"] = relationship(
-        back_populates="codes", cascade="all, delete-orphan"
-    )
+    user: Mapped["User"] = relationship("User", back_populates="codes")
