@@ -26,3 +26,10 @@ python -m pytest tests
 python -m pytest --cov-report term --cov=tests
 ```
 
+### Pre-commit check
+
+```
+pre-commit autoupdate
+pre-commit install
+pre-commit run --all-files
+```

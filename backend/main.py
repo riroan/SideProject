@@ -1,7 +1,6 @@
+import uvicorn
 from app import create_app
 from settings import Settings
-
-import uvicorn
 
 app = create_app(Settings())
 

@@ -1,9 +1,6 @@
 from model.base import Base
-
 from sqlalchemy import ForeignKey, String, Text
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class Code(Base):

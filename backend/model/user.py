@@ -1,10 +1,8 @@
 from datetime import datetime
-from model.base import Base
 
+from model.base import Base
 from sqlalchemy import DateTime, Integer, String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class User(Base):
