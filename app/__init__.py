@@ -1,13 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
-from app.api.auth import api as auth
+from app.api.example import api as example
+from settings import Settings
 
 
-def create_app():
-    app = FastAPI()
+def create_app(settings: Settings):
+    app = FastAPI(
+        title=settings.app_name
+    )
 
     app.add_middleware(
         CORSMiddleware,
@@ -25,6 +28,6 @@ def create_app():
         minimum_size=1024
     )
 
-    app.include_router(auth, prefix="/api/auth")
+    app.include_router(example, prefix="/example")
 
     return app

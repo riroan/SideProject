@@ -10,5 +10,5 @@ async def root():
 
 @api.get("/error")
 async def error():
-    
+
     return "error"
