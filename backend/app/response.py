@@ -10,13 +10,16 @@ class ResponseModelFactory:
         self.status_type = status_type
         self.status_code = status_code
 
-    def __call__(result: Any | None = None) -> ORJSONResponse:
-        data = {"msg": "ok"}
+    def __call__(self, result: Any | None = None) -> ORJSONResponse:
+        data = {"msg": self.status_type}
         if result:
             data["result"] = jsonable_encoder(result)
         else:
-            return ORJSONResponse(data, status_code=status.HTTP_200_OK)
+            return ORJSONResponse(data, status_code=self.status_code)
 
 
 OK = ResponseModelFactory("ok", status.HTTP_200_OK)
 CREATED = ResponseModelFactory("created", status.HTTP_201_CREATED)
+
+BAD_REQUEST = ResponseModelFactory("bad_request", status.HTTP_400_BAD_REQUEST)
+NOT_FOUND = ResponseModelFactory("not_found", status.HTTP_404_NOT_FOUND)

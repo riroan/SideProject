@@ -1,6 +1,7 @@
 from app.api.auth import api as auth
 from app.api.example import api as example
 from app.database import Database
+from app.error_handler import handle_error
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
@@ -19,6 +20,8 @@ def create_app(settings: Settings):
         db_name=settings.db_name,
         echo=True,
     )
+
+    handle_error(app)
 
     app.db = db
 
