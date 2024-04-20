@@ -14,6 +14,4 @@ class User(Base):
     gender: Mapped[int] = mapped_column(Integer)
     birthday: Mapped[datetime] = mapped_column(DateTime)
 
-    codes: Mapped[list["Code"]] = relationship(
-        back_populates="user", cascade="all, delete-orphan"
-    )
+    codes: Mapped[list["Code"]] = relationship("Code", back_populates="user")
