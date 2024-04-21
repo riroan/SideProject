@@ -9,3 +9,8 @@ class UserDTO(BaseModel):
     password: str
     gender: int
     birthday: datetime
+
+
+class LoginDTO(BaseModel):
+    email: str
+    password: str

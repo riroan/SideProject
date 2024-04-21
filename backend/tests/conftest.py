@@ -3,10 +3,9 @@ import pytest_asyncio
 from app import create_app
 from app.depends.common import get_session
 from fastapi import FastAPI
-from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
 from model.base import Base
-from settings import TestSettings
+from settings import TSettings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
@@ -22,7 +21,7 @@ engine = create_engine(
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=True, bind=engine)
 
 
-async def test_get_session():
+async def get_test_session():
     try:
         db = TestingSessionLocal()
         yield db
@@ -38,11 +37,15 @@ def test_db():
     Base.metadata.drop_all(bind=engine)
 
 
+@pytest.fixture()
+def settings():
+    return TSettings()
+
+
 @pytest.fixture
-def app(test_db) -> FastAPI:
-    settings = TestSettings()
+def app(test_db, settings) -> FastAPI:
     app = create_app(settings)
-    app.dependency_overrides[get_session] = test_get_session
+    app.dependency_overrides[get_session] = get_test_session
 
     return app
 
@@ -53,8 +56,3 @@ async def client(app: FastAPI):
         base_url="http://localhost:8000", transport=ASGITransport(app=app)
     ) as ac:
         yield ac
-
-
-@pytest.fixture
-def tc(app: FastAPI) -> TestClient:
-    return TestClient(app)

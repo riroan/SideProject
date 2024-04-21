@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     db_host: str
     db_port: int
 
+    jwt_secret: str
+    jwt_algorithm: str
 
-class TestSettings(Settings):
-    app_name: str
+
+class TSettings(Settings):
+    pass

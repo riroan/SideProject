@@ -14,8 +14,7 @@ class ResponseModelFactory:
         data = {"msg": self.status_type}
         if result:
             data["result"] = jsonable_encoder(result)
-        else:
-            return ORJSONResponse(data, status_code=self.status_code)
+        return ORJSONResponse(data, status_code=self.status_code)
 
 
 OK = ResponseModelFactory("ok", status.HTTP_200_OK)
