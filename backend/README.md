@@ -23,7 +23,7 @@ python -m pytest tests
 ### 커버리지 확인
 
 ```
-python -m pytest --cov-report term --cov=tests
+python -m pytest --cov-report term --cov=app
 ```
 
 ### Pre-commit check
