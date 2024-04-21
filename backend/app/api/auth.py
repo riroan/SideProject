@@ -15,7 +15,9 @@ api = APIRouter()
 async def register(user_info: UserDTO, session: Session = Depends(get_session)):
     user_repository = UserRepository(session)
 
-    encrypted_password = bcrypt.hashpw(user_info.password.encode(), bcrypt.gensalt())
+    encrypted_password = bcrypt.hashpw(
+        user_info.password.encode(), bcrypt.gensalt()
+    ).decode()
 
     user_repository.save(
         nickname=user_info.nickname,
@@ -50,6 +52,6 @@ async def login(
     user_data = {}
     user_data["nickname"] = user.nickname
     user_data["email"] = user.email
-    token = jwt.encode(user_data, settings.jwt_secret, settings.jwt_algorithm)
+    token = jwt.encode(user_data, settings.jwt_secret, algorithm=settings.jwt_algorithm)
 
     return OK(token)

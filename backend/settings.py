@@ -15,5 +15,5 @@ class Settings(BaseSettings):
     jwt_algorithm: str
 
 
-class TestSettings(Settings):
-    app_name: str
+class TSettings(Settings):
+    pass
