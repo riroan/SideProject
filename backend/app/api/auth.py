@@ -30,6 +30,7 @@ async def register(user_info: UserDTO, session: Session = Depends(get_session)):
     return CREATED()
 
 
+# TODO: jwt refresh 토큰 구현
 @api.post("/login")
 async def login(
     login_info: LoginDTO,
