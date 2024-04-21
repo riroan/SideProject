@@ -24,6 +24,7 @@ def create_app(settings: Settings):
     handle_error(app)
 
     app.db = db
+    app.settings = settings
 
     app.add_middleware(
         CORSMiddleware,
